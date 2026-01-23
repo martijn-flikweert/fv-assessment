@@ -1,0 +1,52 @@
+{
+  "defects": [
+    {"id": 0, "key": "rot", "label": "Rot"},
+    {"id": 1, "key": "green", "label": "Green"},
+    {"id": 2, "key": "bruise", "label": "Bruise"},
+    {"id": 3, "key": "skin", "label": "Skin"},
+    {"id": 4, "key": "sprout", "label": "Sprout"},
+    {"id": 5, "key": "size_small", "label": "Small"},
+    {"id": 6, "key": "size_large", "label": "Large"},
+    {"id": 7, "key": "shape", "label": "Shape"},
+    {"id": 8, "key": "damage", "label": "Damage"},
+    {"id": 9, "key": "other", "label": "Other"}
+  ],
+  "visibility": {
+    "default": {
+      "rot": "visible",
+      "green": "ignore",
+      "bruise": "visible",
+      "skin": "hidden",
+      "sprout": "visible",
+      "size_small": "visible",
+      "size_large": "visible",
+      "shape": "hidden",
+      "damage": "visible",
+      "other": "ignore"
+    },
+    "potato": {
+      "rot": "visible",
+      "green": "ignore",
+      "bruise": "visible",
+      "skin": "hidden",
+      "sprout": "visible",
+      "size_small": "visible",
+      "size_large": "visible",
+      "shape": "hidden",
+      "damage": "visible",
+      "other": "ignore"
+    },
+    "oniony": {
+      "rot": "visible",
+      "green": "visible",
+      "bruise": "hidden",
+      "skin": "hidden",
+      "sprout": "visible",
+      "size_small": "hidden",
+      "size_large": "visible",
+      "shape": "hidden",
+      "damage": "visible",
+      "other": "ignore"
+    }
+  }
+}

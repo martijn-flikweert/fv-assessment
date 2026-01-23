@@ -1,0 +1,32 @@
+{
+  "machine": {
+    "id": "QG-01",
+    "type": "QG",
+    "customer": "meijer"
+  },
+  "crops": [
+    "potato",
+    "potatow",
+    "oniony",
+    "onionr",
+    "onionp",
+    "shallot"
+  ],
+  "crop_settings": {
+    "potato": {
+      "alias": "Potato",
+      "illumination_profile": "p1",
+      "box_offset_increase": 0
+    },
+    "oniony": {
+      "alias": "Onion Yellow",
+      "illumination_profile": "o1",
+      "box_offset_increase": 2
+    }
+  },
+  "overrides": {
+    "customer_crop_filters": {
+      "meijer": ["potato"]
+    }
+  }
+}
