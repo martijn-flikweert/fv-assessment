@@ -19,6 +19,9 @@ crops = config.get("crops", [])
 ```
 - Alle crops worden al getoond doordat de `get_available_crops` methode crops returned.
 
+### Opdracht 3:
+- Ik heb `onionw` toegevoegd aan de config file en daarna de pagina vernieuwd, `onionw` werd juist getoond.
+
 ### Overige:
 - Ik heb de aanname gedaan dat een config file verscheelt per klant, waarmee de "customer" dus niet opgeslagen hoeft te worden in de state store, maar direct uit de config gehaald kan worden. De state store is alleen bedoeld voor dynamische waarden die kunnen veranderen (bijv. `selected_crop`).
 - .gitignore toegevoegd zodat de `__pycache__` files niet mee gecommit worden.
