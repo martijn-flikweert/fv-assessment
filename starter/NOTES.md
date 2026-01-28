@@ -7,14 +7,14 @@
 
 ### Opdracht 2:
 - Ik heb de hardcoded klantfilters verwijderd, dit stuk code:
-```
+```python
 # Legacy customer hardcode (bad)
 if state_store.get_state(key = "customer") == "meijer":
     return ["potato"]
 ```
-- Ook heb ik de filters uit de `config.json` verwijderd. Dit wordt niet gebruikt en kan voor verwarring zorgen.
-- Alle beschikbare crops worden alle opgehaald uit de config door dit stuk code:
-```
+- Ook heb ik de filters uit de `config.json` verwijderd, deze wordt niet gebruikt en kan voor verwarring zorgen.
+- Alle beschikbare crops worden opgehaald uit de config door dit stuk code:
+```python
 crops = config.get("crops", [])
 ```
 - Alle crops worden al getoond doordat de `get_available_crops` methode crops returned.
