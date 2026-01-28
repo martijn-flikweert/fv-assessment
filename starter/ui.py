@@ -14,9 +14,6 @@ VISIBLE_DEFECTS = {"rot", "green", "bruise", "sprout"}
 
 def get_available_crops(config: dict) -> list[str]:
     crops = config.get("crops", [])
-    # Legacy customer hardcode (bad)
-    if state_store.get_state("customer") == "meijer":
-        return ["potato"]
     return crops
 
 def select_crop(crop: str) -> None:
