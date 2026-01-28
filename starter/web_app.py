@@ -6,14 +6,12 @@ from pathlib import Path
 from typing import Any
 
 import ui
-from state import GLOBAL_D
+from state_store import state_store
 
 BASE_DIR = Path(__file__).parent
 
-
 def load_json(name: str) -> dict[str, Any]:
     return json.loads((BASE_DIR / name).read_text())
-
 
 HTML = """<!doctype html>
 <html>
@@ -109,6 +107,10 @@ HTML = """<!doctype html>
         });
         const state = await getJson("/api/state");
         document.getElementById("selectedCrop").textContent = `Selected: ${state.selected_crop || "-"}`;
+        
+        // Reload defects after crop selection
+        const defects = await getJson("/api/defects");
+        renderDefects(defects);
       });
 
       load();
@@ -116,7 +118,6 @@ HTML = """<!doctype html>
   </body>
 </html>
 """
-
 
 class Handler(BaseHTTPRequestHandler):
     def _send_json(self, payload: Any, status: int = 200) -> None:
@@ -144,8 +145,8 @@ class Handler(BaseHTTPRequestHandler):
             config = load_json("config.json")
             state = {
                 "machine_id": config.get("machine", {}).get("id"),
-                "customer": GLOBAL_D.get("customer"),
-                "selected_crop": GLOBAL_D.get("selected_crop"),
+                "customer": config.get("machine", {}).get("customer"),
+                "selected_crop": state_store.get_state("selected_crop"),
             }
             self._send_json(state)
             return
@@ -158,7 +159,8 @@ class Handler(BaseHTTPRequestHandler):
 
         if self.path == "/api/defects":
             # render_defect_sliders may return list[str] or list[dict]
-            defects = ui.render_defect_sliders()
+            defects_config = load_json("defects.json")
+            defects = ui.render_defect_sliders(defects_config)
             self._send_json(defects)
             return
 
@@ -178,7 +180,6 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         self._send_json({"error": "not found"}, status=404)
-
 
 def run(host: str = "127.0.0.1", port: int = 8000) -> None:
     server = HTTPServer((host, port), Handler)

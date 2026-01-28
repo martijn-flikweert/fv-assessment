@@ -1,35 +1,39 @@
 from __future__ import annotations
 
-from state import GLOBAL_D
-from ipc import send_selected_crop
+from state_store import state_store
+from panel_pc_client import PanelPCClient
 
-# Legacy hardcoded defect labels (bad)
-DEFECT_LABELS = [
-    "rot", "green", "bruise", "skin", "sprout",
-    "size_small", "size_large", "shape", "damage", "other",
-]
-
-# Legacy visible defects (bad)
-VISIBLE_DEFECTS = {"rot", "green", "bruise", "sprout"}
-
+panelPCClient = PanelPCClient(host = "localhost", port = 9000) # Random port for example
 
 def get_available_crops(config: dict) -> list[str]:
     crops = config.get("crops", [])
-    # Legacy customer hardcode (bad)
-    if GLOBAL_D.get("customer") == "meijer":
-        return ["potato"]
     return crops
 
-
 def select_crop(crop: str) -> None:
-    GLOBAL_D["selected_crop"] = crop
-    send_selected_crop(crop)
+    state_store.save_state("selected_crop", crop)
+    panelPCClient.send_selected_crop(crop)
 
-
-def render_defect_sliders() -> list[str]:
-    # Legacy: ignores per-crop defect visibility config
-    sliders = []
-    for label in DEFECT_LABELS:
-        if label in VISIBLE_DEFECTS:
-            sliders.append(label)
+def render_defect_sliders(defects_config: dict) -> list[str]:
+    selected_crop = state_store.get_state("selected_crop")
+    if not selected_crop:
+        return []
+    
+    defects = defects_config.get("defects", [])
+    visibility_section = defects_config.get("visibility", {})
+    
+    crop_key = selected_crop if selected_crop in visibility_section else "default"
+    visibilities_for_selected_crop = visibility_section.get(crop_key, {})
+    
+    sliders = []    
+    for defect in defects:
+        key = defect.get("key")
+        label = defect.get("label")
+        status = visibilities_for_selected_crop.get(key, "hidden")
+        
+        if status in ["visible", "ignore"]:
+            sliders.append({
+                "label": label,
+                "status": status
+            })
+    
     return sliders
