@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import ui
-from state import GLOBAL_D
+from state_store import state_store
 
 BASE_DIR = Path(__file__).parent
 
@@ -117,7 +117,6 @@ HTML = """<!doctype html>
 </html>
 """
 
-
 class Handler(BaseHTTPRequestHandler):
     def _send_json(self, payload: Any, status: int = 200) -> None:
         data = json.dumps(payload).encode("utf-8")
@@ -144,8 +143,8 @@ class Handler(BaseHTTPRequestHandler):
             config = load_json("config.json")
             state = {
                 "machine_id": config.get("machine", {}).get("id"),
-                "customer": GLOBAL_D.get("customer"),
-                "selected_crop": GLOBAL_D.get("selected_crop"),
+                "customer": state_store.get_state("customer"),
+                "selected_crop": state_store.get_state("selected_crop"),
             }
             self._send_json(state)
             return
@@ -178,7 +177,6 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         self._send_json({"error": "not found"}, status=404)
-
 
 def run(host: str = "127.0.0.1", port: int = 8000) -> None:
     server = HTTPServer((host, port), Handler)

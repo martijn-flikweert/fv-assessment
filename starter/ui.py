@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from state import GLOBAL_D
+from state_store import state_store
 from ipc import send_selected_crop
 
 # Legacy hardcoded defect labels (bad)
@@ -12,19 +12,16 @@ DEFECT_LABELS = [
 # Legacy visible defects (bad)
 VISIBLE_DEFECTS = {"rot", "green", "bruise", "sprout"}
 
-
 def get_available_crops(config: dict) -> list[str]:
     crops = config.get("crops", [])
     # Legacy customer hardcode (bad)
-    if GLOBAL_D.get("customer") == "meijer":
+    if state_store.get_state("customer") == "meijer":
         return ["potato"]
     return crops
 
-
 def select_crop(crop: str) -> None:
-    GLOBAL_D["selected_crop"] = crop
+    state_store.save_state("selected_crop", crop)
     send_selected_crop(crop)
-
 
 def render_defect_sliders() -> list[str]:
     # Legacy: ignores per-crop defect visibility config
