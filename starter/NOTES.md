@@ -37,6 +37,11 @@ renderDefects(defects);
 ### Opdracht 5:
 - Ik heb de ipc vervangen door de PanelPCClient, waarbij ik er vanuit ga dat dit de communicatie is naar de PC toe. Aangezien er geen PC is om mee te praten geen implementatie kunnen maken van de communicatie hiermee.
 
+### Opdracht 6:
+- Ik heb de tests opgedeeld in classes per onderdeel, zodat er duidelijk onderscheid zitten tussen de tests. 
+- Ik heb de bestaande tests geupdate met error messages.
+- Ik heb tests toegevoegd om de state store implementatie te testen.
+
 ### Overige:
 - Ik heb de aanname gedaan dat een config file verscheelt per klant, waarmee de "customer" dus niet opgeslagen hoeft te worden in de state store, maar direct uit de config gehaald kan worden. De state store is alleen bedoeld voor dynamische waarden die kunnen veranderen (bijv. `selected_crop`).
 - .gitignore toegevoegd zodat de `__pycache__` files niet mee gecommit worden.
@@ -47,6 +52,8 @@ renderDefects(defects);
 - De code verder opschonen en meer commments zetten waar nodig.
 - De UI mooier maken. 
 - De defects file uitbreiden met visibilities voor alle crops.
+- Methods toevoegen aan de unit tests, zodat de tests compacter worden.
+- Fout situaties testen door het inladen van een (voor die test) verkeerde config of defects json.
 
 ## Open vragen
 - Ik heb het gevoel dat bij sommige vragen een deel van de implementatie al gedaan was, bijvoorbeeld de aparte status voor "ignore" in the UI. Klopt dit, of mis ik hier de eigenlijke kern van de opdracht?
