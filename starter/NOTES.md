@@ -2,7 +2,7 @@
 
 ## Keuzes
 ### Opdracht 1:
-- Ik heb gekozen voor 3 methodes `save_state()`, `get_state()` en `remove_state()`. Dit zijn voor mij de basis functies die nodig zijn voor een functionerende statestore. Als de applicatie groter wordt, kunnen eventueel extra methodes worden toegevoegd (bijv. `get_all()`, `update_state()`, etc.), maar voor dit project is dit voldoende.
+- Ik heb gekozen voor 3 methodes `save_state()`, `get_state()` en `remove_state()`. Dit zijn voor mij de basis functies die nodig zijn voor een functionerende state store. Als de applicatie groter wordt, kunnen eventueel extra methodes worden toegevoegd (bijv. `get_all()`, `update_state()`, etc.), maar voor dit project is dit voldoende.
 - Ik heb de state store thread safe geïmplementeerd gebruikmakend van RLock. Dit is waarschijnlijk overbodig voor dit project (geen multi-threading), maar het is een simpele toevoeging wat ook weinig tijd kost. 
 
 ### Opdracht 2:
@@ -43,7 +43,7 @@ renderDefects(defects);
 - Ik heb tests toegevoegd om de state store implementatie te testen.
 
 ### Overige:
-- Ik heb de aanname gedaan dat een config file verscheelt per klant, waarmee de "customer" dus niet opgeslagen hoeft te worden in de state store, maar direct uit de config gehaald kan worden. De state store is alleen bedoeld voor dynamische waarden die kunnen veranderen (bijv. `selected_crop`).
+- Ik heb de aanname gedaan dat een config file verschilt per klant, waarmee de "customer" dus niet opgeslagen hoeft te worden in de state store, maar direct uit de config gehaald kan worden. De state store is alleen bedoeld voor dynamische waarden die kunnen veranderen (bijv. `selected_crop`).
 - .gitignore toegevoegd zodat de `__pycache__` files niet mee gecommit worden.
 
 ## Wat zou je doen met meer tijd?
@@ -54,6 +54,7 @@ renderDefects(defects);
 - De defects file uitbreiden met visibilities voor alle crops.
 - Methods toevoegen aan de unit tests, zodat de tests compacter worden.
 - Fout situaties testen door het inladen van een (voor die test) verkeerde config of defects json.
+- Verder onderzoek gedaan naar Python en de best practices.
 
 ## Open vragen
 - Ik heb het gevoel dat bij sommige vragen een deel van de implementatie al gedaan was, bijvoorbeeld de aparte status voor "ignore" in the UI. Klopt dit, of mis ik hier de eigenlijke kern van de opdracht?
