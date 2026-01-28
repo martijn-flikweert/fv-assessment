@@ -23,10 +23,5 @@
       "illumination_profile": "o1",
       "box_offset_increase": 2
     }
-  },
-  "overrides": {
-    "customer_crop_filters": {
-      "meijer": ["potato"]
-    }
   }
 }
