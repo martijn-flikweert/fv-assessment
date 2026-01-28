@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from state_store import state_store
-from ipc import send_selected_crop
+from ipc import PanelPCClient
+
+panelPCClient = PanelPCClient(host = "localhost", port = 9000) # Random port for example
 
 def get_available_crops(config: dict) -> list[str]:
     crops = config.get("crops", [])
@@ -9,7 +11,7 @@ def get_available_crops(config: dict) -> list[str]:
 
 def select_crop(crop: str) -> None:
     state_store.save_state("selected_crop", crop)
-    send_selected_crop(crop)
+    panelPCClient.send_selected_crop(crop)
 
 def render_defect_sliders(defects_config: dict) -> list[str]:
     selected_crop = state_store.get_state("selected_crop")
