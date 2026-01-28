@@ -10,10 +10,8 @@ from state_store import state_store
 
 BASE_DIR = Path(__file__).parent
 
-
 def load_json(name: str) -> dict[str, Any]:
     return json.loads((BASE_DIR / name).read_text())
-
 
 HTML = """<!doctype html>
 <html>
@@ -143,7 +141,7 @@ class Handler(BaseHTTPRequestHandler):
             config = load_json("config.json")
             state = {
                 "machine_id": config.get("machine", {}).get("id"),
-                "customer": state_store.get_state("customer"),
+                "customer": config.get("machine", {}).get("customer"),
                 "selected_crop": state_store.get_state("selected_crop"),
             }
             self._send_json(state)
