@@ -13,10 +13,14 @@ def select_crop(crop: str) -> None:
 
 def render_defect_sliders(defects_config: dict) -> list[str]:
     selected_crop = state_store.get_state("selected_crop")
+    if not selected_crop:
+        return []
+    
     defects = defects_config.get("defects", [])
     visibility_section = defects_config.get("visibility", {})
     
-    visibilities_for_selected_crop = visibility_section.get(selected_crop, {})
+    crop_key = selected_crop if selected_crop in visibility_section else "default"
+    visibilities_for_selected_crop = visibility_section.get(crop_key, {})
     
     sliders = []    
     for defect in defects:
