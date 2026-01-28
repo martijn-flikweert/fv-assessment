@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from state_store import state_store
-from ipc import PanelPCClient
+from panel_pc_client import PanelPCClient
 
 panelPCClient = PanelPCClient(host = "localhost", port = 9000) # Random port for example
 
