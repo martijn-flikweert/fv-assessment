@@ -107,6 +107,10 @@ HTML = """<!doctype html>
         });
         const state = await getJson("/api/state");
         document.getElementById("selectedCrop").textContent = `Selected: ${state.selected_crop || "-"}`;
+        
+        // Reload defects after crop selection
+        const defects = await getJson("/api/defects");
+        renderDefects(defects);
       });
 
       load();
@@ -155,7 +159,8 @@ class Handler(BaseHTTPRequestHandler):
 
         if self.path == "/api/defects":
             # render_defect_sliders may return list[str] or list[dict]
-            defects = ui.render_defect_sliders()
+            defects_config = load_json("defects.json")
+            defects = ui.render_defect_sliders(defects_config)
             self._send_json(defects)
             return
 
