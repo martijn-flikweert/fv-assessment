@@ -16,13 +16,13 @@ def render_defect_sliders(defects_config: dict) -> list[str]:
     defects = defects_config.get("defects", [])
     visibility_section = defects_config.get("visibility", {})
     
-    visibility_for_selected_crop = visibility_section.get(selected_crop, {})
+    visibilities_for_selected_crop = visibility_section.get(selected_crop, {})
     
     sliders = []    
     for defect in defects:
         key = defect.get("key")
         label = defect.get("label")
-        status = visibility_for_selected_crop.get(key, "hidden")
+        status = visibilities_for_selected_crop.get(key, "hidden")
         
         if status in ["visible", "ignore"]:
             sliders.append({
